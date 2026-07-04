@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Muskan! 🎈</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffe5f1, #fff4d2);
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+
+        #page1 {
+            background: radial-gradient(circle at 30% 30%, #fff0e0, #ffd9e8);
+        }
+
+        #page2 {
+            background: linear-gradient(135deg, #b8e1ff, #efd2ff);
+        }
+
+        .hidden { display: none !important; }
+
+        /* Page 1 Styles */
+        .container {
+            max-width: 750px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 2rem;
+            border-radius: 80px 80px 40px 40px;
+            border: 4px solid white;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(255, 120, 160, 0.3);
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #c43a6b;
+            text-shadow: 3px 3px 0 white, 6px 6px 0 #ffb0c3;
+            margin-bottom: 1rem;
+        }
+
+        h1 i {
+            color: #ffb347;
+            margin: 0 10px;
+        }
+
+        /* Main Photo */
+        .main-photo {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid white;
+            margin: 20px auto;
+            box-shadow: 0 20px 30px #ffa5bc;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .main-photo:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Party Poppers */
+        .poppers {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            font-size: 3.8rem;
+            margin: 25px 0;
+        }
+
+        .poppers i {
+            color: #ff6f91;
+            filter: drop-shadow(0 8px 6px #ffb0b0);
+            animation: shake 0.5s infinite alternate;
+        }
+
+        .poppers i:nth-child(2) { animation-delay: 0.2s; }
+        .poppers i:nth-child(3) { animation-delay: 0.4s; }
+        .poppers i:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes shake {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+
+        /* ===================== REALISTIC BALLOONS ===================== */
+        .balloons-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0 35px;
+        }
+
+        .balloon-unit {
+            position: relative;
+            width: 78px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: 50% 100%;
+            animation: swayReal 3.4s infinite ease-in-out;
+        }
+
+        .balloon-unit:nth-child(1) { animation-delay: 0s; }
+        .balloon-unit:nth-child(2) { animation-delay: 0.5s; }
+        .balloon-unit:nth-child(3) { animation-delay: 1s; }
+        .balloon-unit:nth-child(4) { animation-delay: 0.2s; }
+
+        @keyframes swayReal {
+            0%   { transform: translateY(0) rotate(-4deg); }
+            50%  { transform: translateY(-18px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(-4deg); }
+        }
+
+        .balloon-body-svg {
+            width: 78px;
+            height: 96px;
+            filter: drop-shadow(0 14px 10px rgba(0,0,0,0.18));
+            display: block;
+        }
+
+        .balloon-string-svg {
+            width: 78px;
+            height: 46px;
+            margin-top: -6px;
+            display: block;
+        }
+
+        /* Bigger interactive balloons on page 2 */
+        .balloon-fleet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 45px;
+            margin: 20px 0 20px;
+            perspective: 600px;
+        }
+
+        .balloon-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .balloon-card .balloon-unit {
+            width: 110px;
+            animation-name: swayBig;
+            animation-duration: 3s;
+            transition: transform 0.2s ease;
+        }
+
+        .balloon-card:hover .balloon-unit {
+            transform: scale(1.06);
+        }
+
+        @keyframes swayBig {
+            0%   { transform: translateY(0) rotate(-5deg); }
+            50%  { transform: translateY(-30px) rotate(4deg); }
+            100% { transform: translateY(0) rotate(-5deg); }
+        }
+
+        .balloon-card .balloon-body-svg {
+            width: 110px;
+            height: 136px;
+        }
+
+        .balloon-card .balloon-string-svg {
+            width: 110px;
+            height: 60px;
+            margin-top: -8px;
+        }
+
+        /* Pop / burst state */
+        .balloon-unit.popping .balloon-body-svg {
+            animation: popStretch 0.18s ease-out forwards;
+        }
+
+        @keyframes popStretch {
+            0%   { transform: scale(1); opacity: 1; }
+            55%  { transform: scale(1.28, 1.12); opacity: 1; }
+            100% { transform: scale(0.2); opacity: 0; }
+        }
+
+        .balloon-unit.popping .balloon-string-svg {
+            animation: stringFall 0.5s ease-in forwards;
+        }
+
+        @keyframes stringFall {
+            0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(20px) rotate(25deg); }
+        }
+
+        .confetti-bit {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 999;
+            animation: confettiBurst 0.7s ease-out forwards;
+        }
+
+        @keyframes confettiBurst {
+            0%   { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0.4) rotate(var(--rot)); opacity: 0; }
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 60px;
+            border: 3px dashed #ff85a2;
+            margin: 30px 0;
+        }
+
+        .quote-input {
+            border: none;
+            font-size: 1.6rem;
+            text-align: center;
+            width: 100%;
+            padding: 0.7rem;
+            background: #fff0f3;
+            border-radius: 50px;
+            color: #c43a6b;
+            font-weight: 500;
+        }
+
+        .quote-input:focus {
+            outline: 3px solid #ffb0c3;
+        }
+
+        /* Surprise Button */
+        .surprise-btn {
+            background: #ff85b3;
+            color: white;
+            font-size: 2.2rem;
+            font-weight: bold;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 70px;
+            border: 4px solid white;
+            box-shadow: 0 12px 0 #b3436e, 0 10px 20px #ffb0c3;
+            cursor: pointer;
+            transition: 0.1s;
+            margin-top: 15px;
+        }
+
+        .surprise-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 4px 0 #b3436e, 0 10px 20px #ffb0c3;
+        }
+
+        .surprise-btn i {
+            margin: 0 10px;
+        }
+
+        .pop-text {
+            background: #ffe5b4;
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 10px;
+            border: 3px solid white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 0 #cfa7a7;
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            min-height: 150px;
+            margin: 40px 0 25px;
+        }
+
+        .photo-item {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 6px solid white;
+            box-shadow: 0 15px 20px rgba(150, 100, 150, 0.3);
+            animation: popIn 0.5s ease forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+            80% { transform: scale(1.1) rotate(2deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .quote-p2 {
+            background: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 70px;
+            font-size: 2rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 0 #dba5a5;
+            margin: 20px 0;
+            text-align: center;
+            color: #c43a6b;
+            max-width: 80%;
+        }
+
+        /* Share Button */
+        .share-btn {
+            background: linear-gradient(45deg, #f77737, #d62976, #4f5bd5);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            padding: 18px 40px;
+            border-radius: 70px;
+            border: 4px solid white;
+            box-shadow: 0 10px 0 #aa3f88;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .share-btn:active {
+            transform: translateY(7px);
+            box-shadow: 0 3px 0 #aa3f88;
+        }
+
+        .share-btn i {
+            font-size: 2.4rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== PAGE 1 ========== -->
+<div id="page1" class="page">
+    <div class="container">
+        <h1>
+            <i class="fas fa-crown"></i>
+            Happy Birthday
+            <i class="fas fa-crown"></i>
+        </h1>
+
+        <!-- RADHIKA'S MAIN PHOTO: photo1.png -->
+        <img src="photo1.png" alt="Happy Birthday Muskan!" class="main-photo">
+
+        <!-- Party Poppers -->
+        <div class="poppers">
+            <i class="fas fa-candy-cane"></i>
+            <i class="fas fa-confetti"></i>
+            <i class="fas fa-party-horn"></i>
+            <i class="fas fa-confetti"></i>
+        </div>
+
+        <!-- Realistic decorative balloons (generated by JS) -->
+        <div class="balloons-row" id="decoBalloons"></div>
+
+        <!-- ✅ RADHIKA'S BIRTHDAY QUOTE - EXACTLY AS YOU WROTE IT -->
+        <div class="quote-box">
+            <input type="text" id="quoteInput" class="quote-input" value="Happy birthday Muskan! Another year of you being the main character 🎂✨">
+        </div>
+
+        <!-- Open Surprise Button -->
+        <button class="surprise-btn" id="openSurprise">
+            <i class="fas fa-gift"></i>
+            open surprise
+            <i class="fas fa-gift"></i>
+        </button>
+    </div>
+</div>
+
+<!-- ========== PAGE 2 ========== -->
+<div id="page2" class="page hidden">
+
+    <!-- Four Flying, Poppable Balloons (generated by JS) -->
+    <div class="balloon-fleet" id="balloonFleet"></div>
+
+    <!-- RADHIKA'S PHOTOS: photo2.png, photo3.png, photo4.png, photo5.png -->
+    <div style="display: none;" id="photoStorage">
+        <img src="photo2.png" alt="Beautiful memory 1">
+        <img src="photo3.png" alt="Beautiful memory 2">
+        <img src="photo4.png" alt="Beautiful memory 3">
+        <img src="photo5.png" alt="Beautiful memory 4">
+    </div>
+
+    <!-- Photo Gallery (photos appear here when balloons pop) -->
+    <div class="photo-gallery" id="photoGallery"></div>
+
+    <!-- Birthday Quote (same as page 1) -->
+    <div class="quote-p2" id="quoteDisplayP2"></div>
+
+    <!-- Share to Instagram Button -->
+    <button class="share-btn" id="shareBtn">
+        <i class="fab fa-instagram"></i>
+        Instagram Story
+    </button>
+</div>
+
+<script>
+// ========================================================================
+// REALISTIC BALLOON GENERATOR (SVG, with gradient shading + glossy shine)
+// ========================================================================
+const BALLOON_PALETTE = [
+    { light: '#ffb0c3', base: '#ff4d6d', dark: '#c62d47' },
+    { light: '#ffd9a0', base: '#ffb347', dark: '#e0932a' },
+    { light: '#a0eae5', base: '#4ecdc4', dark: '#2ba39b' },
+    { light: '#d9c2ff', base: '#b283fe', dark: '#8b53e0' }
+];
+
+function balloonSVG(uid, colors) {
+    return `
+    <svg class="balloon-body-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <radialGradient id="g-${uid}" cx="35%" cy="28%" r="75%">
+                <stop offset="0%" stop-color="${colors.light}"/>
+                <stop offset="55%" stop-color="${colors.base}"/>
+                <stop offset="100%" stop-color="${colors.dark}"/>
+            </radialGradient>
+        </defs>
+        <path d="M50,4 C24,4 8,32 8,56 C8,86 27,112 50,112 C73,112 92,86 92,56 C92,32 76,4 50,4 Z"
+              fill="url(#g-${uid})" stroke="${colors.dark}" stroke-width="1.2"/>
+        <path d="M44,108 L56,108 L50,120 Z" fill="${colors.dark}"/>
+        <ellipse cx="33" cy="34" rx="11" ry="18" fill="#ffffff" opacity="0.4" transform="rotate(-18 33 34)"/>
+        <ellipse cx="29" cy="27" rx="4.5" ry="8" fill="#ffffff" opacity="0.65" transform="rotate(-18 29 27)"/>
+    </svg>
+    <svg class="balloon-string-svg" viewBox="0 0 100 46" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,0 Q40,12 50,20 Q60,28 48,46" stroke="#8b6d4b" stroke-width="1.6" fill="none" opacity="0.75"/>
+    </svg>`;
+}
+
+function makeBalloonUnit(uid, colorIdx) {
+    const wrap = document.createElement('div');
+    wrap.className = 'balloon-unit';
+    wrap.innerHTML = balloonSVG(uid, BALLOON_PALETTE[colorIdx % BALLOON_PALETTE.length]);
+    return wrap;
+}
+
+// Decorative row on page 1 (non-interactive)
+const decoContainer = document.getElementById('decoBalloons');
+for (let i = 0; i < 4; i++) {
+    decoContainer.appendChild(makeBalloonUnit('deco' + i, i));
+}
+
+// Interactive "pop me" balloons on page 2
+const fleetContainer = document.getElementById('balloonFleet');
+for (let i = 0; i < 4; i++) {
+    const card = document.createElement('div');
+    card.className = 'balloon-card';
+    card.dataset.index = i;
+
+    const unit = makeBalloonUnit('card' + i, i);
+    const popText = document.createElement('span');
+    popText.className = 'pop-text';
+    popText.innerText = '🎈 pop me';
+
+    card.appendChild(unit);
+    card.appendChild(popText);
+    fleetContainer.appendChild(card);
+}
+
+// ========================================================================
+// WEBSITE FUNCTIONALITY
+// ========================================================================
+const page1 = document.getElementById('page1');
+const page2 = document.getElementById('page2');
+const openBtn = document.getElementById('openSurprise');
+const quoteInput = document.getElementById('quoteInput');
+const quoteDisplay = document.getElementById('quoteDisplayP2');
+
+// Update quote on page 2 when typed on page 1
+quoteInput.addEventListener('input', function() {
+    quoteDisplay.innerText = quoteInput.value;
+});
+
+// Set initial quote
+quoteDisplay.innerText = quoteInput.value;
+
+// Go to page 2 when button is clicked
+openBtn.addEventListener('click', function() {
+    page1.classList.add('hidden');
+    page2.classList.remove('hidden');
+});
+
+// ========== CONFETTI BURST HELPER ==========
+function spawnConfetti(x, y, colors) {
+    const pieces = 14;
+    for (let i = 0; i < pieces; i++) {
+        const bit = document.createElement('div');
+        bit.className = 'confetti-bit';
+        const angle = (Math.PI * 2 * i) / pieces + Math.random() * 0.5;
+        const dist = 60 + Math.random() * 60;
+        const dx = Math.cos(angle) * dist;
+        const dy = Math.sin(angle) * dist - 20;
+        bit.style.setProperty('--dx', dx + 'px');
+        bit.style.setProperty('--dy', dy + 'px');
+        bit.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        bit.style.left = x + 'px';
+        bit.style.top = y + 'px';
+        bit.style.background = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(bit);
+        setTimeout(() => bit.remove(), 750);
+    }
+}
+
+// ========== BALLOON POPPING ==========
+const balloonCards = document.querySelectorAll('.balloon-card');
+const photoStorage = document.getElementById('photoStorage');
+const photoGallery = document.getElementById('photoGallery');
+let popped = [false, false, false, false];
+
+balloonCards.forEach((card, index) => {
+    card.addEventListener('click', function() {
+        if (popped[index]) return;
+        popped[index] = true;
+
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 3;
+        const palette = BALLOON_PALETTE[index % BALLOON_PALETTE.length];
+        spawnConfetti(cx, cy, [palette.base, palette.light, palette.dark, '#ffffff']);
+
+        const unit = card.querySelector('.balloon-unit');
+        unit.classList.add('popping');
+
+        const popTextEl = card.querySelector('.pop-text');
+        popTextEl.innerText = '💥 popped!';
+
+        // Reveal the matching photo after the burst plays
+        setTimeout(() => {
+            const hiddenPhotos = photoStorage.querySelectorAll('img');
+            if (hiddenPhotos.length > index) {
+                const newImg = document.createElement('img');
+                newImg.src = hiddenPhotos[index].src;
+                newImg.alt = hiddenPhotos[index].alt;
+                newImg.classList.add('photo-item');
+                newImg.style.transform = `rotate(${Math.random() * 8 - 4}deg)`;
+                photoGallery.appendChild(newImg);
+            }
+        }, 180);
+
+        card.style.pointerEvents = 'none';
+    });
+});
+
+// ========== INSTAGRAM SHARE ==========
+const shareBtn = document.getElementById('shareBtn');
+
+shareBtn.addEventListener('click', function() {
+    const message = encodeURIComponent('🎈 Happy Birthday Muskan! 🎉 ' + quoteInput.value);
+    const instaUrl = `https://www.instagram.com/create/story/?source=story&text=${message}`;
+
+    document.body.style.transition = 'box-shadow 0.2s';
+    document.body.style.boxShadow = 'inset 0 0 60px #ff69b4';
+    setTimeout(() => document.body.style.boxShadow = 'none', 600);
+
+    if (confirm('✨ Share this birthday surprise to Instagram Story?')) {
+        window.open(instaUrl, '_blank');
+    }
+});
+</script>
+
+<!-- ========== INSTRUCTIONS ========== -->
+<!--
+    ✅ PHOTOS NEEDED (same as before):
+    - Main photo: photo1.png
+    - Balloon 1: photo2.png
+    - Balloon 2: photo3.png
+    - Balloon 3: photo4.png
+    - Balloon 4: photo5.png
+
+    📍 TO USE:
+    1. Save this file as "index.html" in the same folder/repo as before
+       (it overwrites the old flat-icon balloons with realistic ones)
+    2. Keep the 5 PNG photos in the same folder
+    3. Push to GitHub Pages as usual
+
+    🎈 WHAT CHANGED:
+    - Balloons are now hand-drawn SVGs with radial-gradient shading + a
+      glossy highlight, a tapered knot, and a curved string — instead of
+      flat Font Awesome icons.
+    - They sway from the knot (like a real tied balloon) instead of just
+      bobbing up and down.
+    - Popping now does a quick stretch + shrink "burst" and throws a
+      confetti spray, instead of instantly swapping to an explosion icon.
+-->
+</body>
+</html>
